@@ -11,7 +11,7 @@ import "./Signin.css"; // Custom styles for the Signin page
 import { useState } from "react";
 
 const Signin = ({ setIsLoggedIn, setUserRole }) => {
-  const [logginguser, setLoggingUser] = useState("Admin");
+  const [logginguser, setLoggingUser] = useState("");
   const [email, setEmail] = useState(""); // Email state
   const [password, setPassword] = useState(""); // Password state
   const [role, setRole] = useState(""); // Role state
@@ -27,64 +27,6 @@ const Signin = ({ setIsLoggedIn, setUserRole }) => {
   // const handleRoleClick = (role) => {
   //   navigate(`/${role}-login`); // Dynamically navigates to the respective login page
   // };
-
-  const handleSubmit =  async (e) => {
-    e.preventDefault(); // Prevent default form submission
-    setLoading(true); // Set loading state to true to indicate process is ongoing
-    console.log(email, password, role); // Log form data  
-    setError(""); // Reset error state
-
-
-    // try {
-    //   const response = await fetch(`${API_URL}/api/auth/login`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       email,
-    //       password,
-    //       role,
-    //     }),
-    //   });
-
-    //   const data = await response.json();
-
-    //   if (response.ok) {
-    //     // Store the token and user role
-    //     localStorage.setItem("token", data.token);
-    //     localStorage.setItem("userRole", role);
-        
-    //     // Update app state
-    //     setIsLoggedIn(true);
-    //     setUserRole(role);
-
-    //     switch (role) {
-    //       case "admin":
-    //         navigate("/admin/admin-dashboard");
-    //         break;
-    //       case "teacher":
-    //         navigate("/teacher/teacher-dashboard");
-    //         break;
-    //       case "student":
-    //         navigate("/student/student-dashboard");
-    //         break;
-    //       case "parent":
-    //         navigate("/parent/parent-dashboard");
-    //         break;
-    //       default:
-    //         navigate("/");
-    //     }
-    //   } else {
-    //     setError(data.message || "Login failed. Please check your credentials.");
-    //   }
-    // } catch (error) {
-    //   setError("An error occurred during login. Please try again.");
-    // } finally {
-    //   setLoading(false);
-    // }
-    
-  }
 
   const handleRoleChange = (e) => {
     setRole(e.target.value); // Update role state on change
@@ -129,13 +71,11 @@ const Signin = ({ setIsLoggedIn, setUserRole }) => {
 
   return (
     <>
-      {/* <Container className="signup-container"> */}
-      {/* <h2 className="text-center mb-5 text-zinc-900">Select Your Role to Login as</h2> */}
       <Container className="login-container">
         <Card className="login-card">
           <Card.Body>
             <h3>Login</h3>
-            <Form onSubmit={handleSubmit}>
+            <Form>
               {" "}
               {/* Login form */}
               <Form.Group controlId="formRole" className="mt-3">
@@ -147,7 +87,8 @@ const Signin = ({ setIsLoggedIn, setUserRole }) => {
                   onChange={handleRoleChange}
                 >
                   {/* <option value="">Select a role</option> */}
-                  <option value="admin" selected>Admin</option>
+                  <option value="admin" selected>Select a role</option>
+                  <option value="admin">Admin</option>
                   <option value="teacher">Teacher</option>
                   <option value="parent">Parent</option>
                   <option value="student">Student</option>
